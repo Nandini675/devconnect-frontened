@@ -12,7 +12,10 @@ const EditProfile = ({ user }) => {
   const [age, setAge] = useState(user.age || "");
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
+  const [experienceLevel, setexperinceLevel] = useState(user.experienceLevel || "");
+  const [lookingFor, setlookingFor] = useState(user.lookingFor || "");
   const [skills, setSkills] = useState(user.skills?.join(", ") || "");
+
 
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -30,9 +33,10 @@ const EditProfile = ({ user }) => {
           photoUrl,
           age,
           gender,
-        
-          about,
+        about,
           skills: skills.split(",").map((s) => s.trim()),
+          lookingFor,
+          experienceLevel,
         },
         { withCredentials: true }
       );
@@ -47,9 +51,12 @@ const EditProfile = ({ user }) => {
   };
 
   return (
+
+    
     <>
-      <div className="flex justify-center my-10">
-        <div className="flex justify-center mx-10">
+    
+      <div className="flex flex-wrap justify-center gap-8 my-10">
+        <div className="card bg-base-300 w-full md:w-[420px] shadow-xl">
           {/* mainekia */}
           <div className="card bg-base-300 w-full max-w-lg shadow-xl">
   <div className="card-body items-center text-center">
@@ -120,6 +127,20 @@ const EditProfile = ({ user }) => {
         placeholder="Skills (comma-separated)"
         onChange={(e) => setSkills(e.target.value)}
       />
+      <input
+        type="text"
+        value={lookingFor}
+        className="input input-bordered w-full"
+        placeholder="lookinFor:co-founder/mentor/ teammate/ investor/collaborator"
+        onChange={(e) => setlookingFor(e.target.value)}
+      />
+      <input
+        type="text"
+        value={experienceLevel}
+        className="input input-bordered w-full"
+        placeholder="expierenceLevel:beginner/ intermediate/expert"
+        onChange={(e) => setexperinceLevel(e.target.value)}
+      />
     </div>
     {/* Form Fields End */}
 
@@ -131,11 +152,15 @@ const EditProfile = ({ user }) => {
     </div>
   </div>
 </div>
+ </div>
 
-        </div>
+
+
+<div className="w-full md:w-[420px]">
         <UserCard
-          user={{ firstName, lastName, photoUrl, age, gender, about }}
+ user={{ firstName, lastName, photoUrl, age, gender, about,lookingFor }}
         />
+        </div>
       </div>
       {showToast && (
   <div className="fixed top-5 left-1/2 transform -translate-x-1/2 z-50">

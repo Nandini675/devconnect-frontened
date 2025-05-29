@@ -4,10 +4,13 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -84,6 +87,7 @@ const Login = () => {
               <div className="label">
                 <span className="label-text">Email ID:</span>
               </div>
+              
               <input
                 type="text"
                 value={emailId}
@@ -95,12 +99,21 @@ const Login = () => {
               <div className="label">
                 <span className="label-text">Password</span>
               </div>
-              <input
-                type="password"
-                value={password}
-                className="input input-bordered w-full max-w-xs"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+               <div className="relative">
+               <input
+        type={showPassword ? "text" : "password"}
+        value={password}
+        className="input input-bordered w-full pr-10"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className="absolute inset-y-0 right-12 px-2 text-sm text-gray-600 hover:text-black focus:outline-none"
+      >
+        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+      </button>
+      </div>
             </label>
           </div>
           <p className="text-red-500">{error}</p>

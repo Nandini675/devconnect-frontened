@@ -22,11 +22,16 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100/60 backdrop-blur border-b border-base-300 shadow-sm sticky top-0 z-50">
       <div className="flex-1">
+        <img 
+          src="/src/logo.jpg" 
+          alt="Logo" 
+          className="w-16 h-16 rounded-lg"
+        />
         <Link
           to="/"
           className="btn btn-ghost text-2xl font-bold text-primary hover:text-secondary transition duration-300"
         >
-          💻 DevConnect
+          
         </Link>
       </div>
 

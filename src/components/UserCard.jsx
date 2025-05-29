@@ -12,8 +12,8 @@ const UserCard = ({ user }) => {
     age,
     gender,
     about,
-    skills,
-  } = user || {};
+    lookingFor,
+    } = user;
   const dispatch = useDispatch();
 
   const handleSendRequest = async (status, userId) => {
@@ -29,7 +29,7 @@ const UserCard = ({ user }) => {
     }
   };
 
-  if (!user || !_id) return null;
+
 
   return (
     <div className="card bg-base-300 w-[280px] h-[450px] shadow-xl overflow-hidden">
@@ -52,8 +52,15 @@ const UserCard = ({ user }) => {
     <ul className="list-disc list-inside">
       {user.skills.map((skill, index) => (
         <li key={index}>{skill}</li>
-      ))}
-    </ul>
+      ))} </ul>
+
+  </div>
+)}
+{/* Looking For Section */}
+{user.lookingFor && (
+  <div className="mt-2">
+    <h3 className="font-semibold">Looking for:</h3>
+    <p>{user.lookingFor}</p>
   </div>
 )}
 
@@ -66,7 +73,7 @@ const UserCard = ({ user }) => {
             Ignore
           </button>
           <button
-            disabled={!_id}
+           
             className="btn btn-sm btn-secondary"
             onClick={() => handleSendRequest("interested", _id)}
           >
